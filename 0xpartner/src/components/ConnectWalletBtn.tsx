@@ -1,8 +1,8 @@
 "use client";
 import { useState, useEffect } from 'react';
-import { Button, Icon, Text, Flex, Spinner, HStack, Box, Menu, MenuButton, MenuList, MenuItem, VStack, Badge } from '@chakra-ui/react';
+import { Button, Icon, Text, Flex, Spinner, HStack, Box, Menu, MenuButton, MenuList, MenuItem, VStack, Badge, IconButton } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
-import { FaUserPlus, FaCircle, FaEthereum, FaSignOutAlt, FaExchangeAlt } from 'react-icons/fa';
+import { FaUserPlus, FaCircle, FaEthereum, FaSignOutAlt, FaExchangeAlt, FaCopy } from 'react-icons/fa';
 import { ethers } from 'ethers';
 import { getRegistryContractAsSigner } from '@/utils/alchemy'
 import { UserType } from '@/types/UserType';
@@ -211,6 +211,23 @@ const ConnectWalletBtn: React.FC<ConnectWalletBtnProps> = ({
             <Text fontSize="md" color="white">
               {walletAddress.slice(0, 6) + '...' + walletAddress.slice(-4)}
             </Text>
+            <IconButton
+              aria-label="Copy wallet address"
+              icon={<FaCopy />}
+              size="sm"
+              variant="ghost"
+              colorScheme="whiteAlpha"
+              ml={2}
+              onClick={() => {
+                navigator.clipboard.writeText(walletAddress);
+                toast({
+                  title: "Address copied",
+                  status: "success",
+                  duration: 2000,
+                  isClosable: true,
+                });
+              }}
+            />
           </Flex>
           <Box 
             bg="whiteAlpha.300" 
@@ -226,15 +243,15 @@ const ConnectWalletBtn: React.FC<ConnectWalletBtnProps> = ({
           </Box>
           <Menu>
             <MenuButton
-              as={Button}
-              rightIcon={<FaExchangeAlt />}
+              as={IconButton}
+              icon={<FaExchangeAlt />}
               bgGradient="linear(to-r, blue.400, purple.500)"
               color="white"
               variant="solid"
               size="sm"
-              fontWeight="bold"
-              borderRadius="full"
+              borderRadius="lg"
               p={2}
+              height="100%"
               _hover={{
                 bgGradient: "linear(to-r, blue.500, purple.600)",
                 boxShadow: "0px 0px 20px rgba(66, 153, 225, 0.8)"
@@ -243,9 +260,8 @@ const ConnectWalletBtn: React.FC<ConnectWalletBtnProps> = ({
                 bgGradient: "linear(to-r, blue.600, purple.700)",
                 boxShadow: "0px 0px 20px rgba(66, 153, 225, 1)"
               }}
-            >
-              Change Account
-            </MenuButton>
+              aria-label="Change Account"
+            />
             <MenuList 
               bg="whiteAlpha.200" 
               borderColor="white" 
@@ -291,7 +307,7 @@ const ConnectWalletBtn: React.FC<ConnectWalletBtnProps> = ({
             variant="solid"
             size="sm"
             fontWeight="bold"
-            borderRadius="full"
+            borderRadius="lg"
             p={2}
             _hover={{
               bgGradient: "linear(to-r, blue.500, purple.600)",

@@ -28,7 +28,7 @@ import {
           <VStack spacing={16}>
             <Heading
               as="h2"
-              size="3xl"
+              size="2xl"
               textAlign="center"
               bgGradient="linear(to-r, blue.300, purple.300, pink.300)"
               bgClip="text"
@@ -64,15 +64,15 @@ import {
                     w="full"
                   >
                     <VStack spacing={4} align="center" minW="150px">
-                      <Text fontSize="6xl" fontWeight="bold" bgGradient="linear(to-r, blue.300, purple.300)" bgClip="text">
+                      <Text fontSize="5xl" fontWeight="bold" bgGradient="linear(to-r, blue.300, purple.300)" bgClip="text">
                         {index + 1}
                       </Text>
                     </VStack>
                     <VStack align="start" spacing={4} flex={1}>
-                      <Heading as="h3" size="xl" color="white">
+                      <Heading as="h3" size="lg" color="white">
                         {item.step}
                       </Heading>
-                      <Text fontSize="lg" color="gray.300">
+                      <Text fontSize="md" color="gray.300">
                         {item.description}
                       </Text>
                     </VStack>

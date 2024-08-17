@@ -43,7 +43,7 @@ import {
         <VStack spacing={16} width="100%">
           <Heading
             as="h2"
-            size="3xl"
+            size="2xl"
             textAlign="center"
             bgGradient="linear(to-r, blue.300, purple.300, pink.300)"
             bgClip="text"
@@ -83,7 +83,7 @@ import {
             bgGradient="linear(to-r, blue.400, purple.500)"
             color="white"
             rightIcon={<FaArrowRight />}
-            fontSize="2xl"
+            fontSize="xl"
             py={8}
             px={16}
             mt={16}

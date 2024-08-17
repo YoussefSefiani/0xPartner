@@ -36,7 +36,7 @@ const Benefits = () => {
         <VStack spacing={24}>
           <Heading
             as="h2"
-            size="4xl"
+            size="3xl"
             textAlign="center"
             bgGradient="linear(to-r, blue.300, purple.300, pink.300)"
             bgClip="text"
@@ -53,14 +53,14 @@ const Benefits = () => {
             borderRadius="2xl"
           >
             <Table variant="unstyled" colorScheme="whiteAlpha" size="lg">
-              <TableCaption placement="top" fontSize="3xl" fontWeight="bold" mb={8} color="white">
+              <TableCaption placement="top" fontSize="2xl" fontWeight="bold" mb={8} color="white">
                 Comprehensive Benefits for Brands and Influencers
               </TableCaption>
               <Thead>
                 <Tr>
-                  <Th fontSize="2xl" py={8} textAlign="center" color="blue.300">Feature</Th>
-                  <Th fontSize="2xl" py={8} textAlign="center" color="blue.300">For Brands</Th>
-                  <Th fontSize="2xl" py={8} textAlign="center" color="purple.300">For Influencers</Th>
+                  <Th fontSize="xl" py={8} textAlign="left" color="blue.300">Feature</Th>
+                  <Th fontSize="xl" py={8} textAlign="left" color="blue.300">For Brands</Th>
+                  <Th fontSize="xl" py={8} textAlign="left" color="purple.300">For Influencers</Th>
                 </Tr>
               </Thead>
               <Tbody>
@@ -97,17 +97,17 @@ const Benefits = () => {
                   }
                 ].map((row, index) => (
                   <Tr key={index} _hover={{ bg: "rgba(255, 255, 255, 0.05)" }} transition="all 0.3s">
-                    <Td fontWeight="bold" fontSize="xl" py={6} color="white">{row.feature}</Td>
+                    <Td fontWeight="bold" fontSize="lg" py={6} color="white">{row.feature}</Td>
                     <Td>
                       <Flex align="center">
-                        <Icon as={row.brand.icon} color="blue.300" w={8} h={8} mr={4} />
-                        <Text fontSize="lg" color="gray.200">{row.brand.text}</Text>
+                        <Icon as={row.brand.icon} color="blue.300" w={7} h={7} mr={4} />
+                        <Text fontSize="md" color="gray.200">{row.brand.text}</Text>
                       </Flex>
                     </Td>
                     <Td>
                       <Flex align="center">
-                        <Icon as={row.influencer.icon} color="purple.300" w={8} h={8} mr={4} />
-                        <Text fontSize="lg" color="gray.200">{row.influencer.text}</Text>
+                        <Icon as={row.influencer.icon} color="purple.300" w={7} h={7} mr={4} />
+                        <Text fontSize="md" color="gray.200">{row.influencer.text}</Text>
                       </Flex>
                     </Td>
                   </Tr>
@@ -124,7 +124,7 @@ const Benefits = () => {
             bgGradient="linear(to-r, blue.400, purple.500)"
             color="white"
             rightIcon={<FaArrowRight />}
-            fontSize="2xl"
+            fontSize="xl"
             py={8}
             px={16}
             mt={16}

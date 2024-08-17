@@ -37,7 +37,7 @@ import {
             >
               <Heading
                 as="h2"
-                size="4xl"
+                size="3xl"
                 textAlign="center"
                 bgGradient="linear(to-r, blue.300, purple.300)"
                 bgClip="text"
@@ -79,6 +79,7 @@ import {
                   initial={{ opacity: 0, y: 20 }}
                   animate={inView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.5, delay: 0.1 * (index + 1) }}
+                  height="100%"
                 >
                   <VStack
                     align="start"
@@ -89,12 +90,13 @@ import {
                     _hover={{ transform: 'translateY(-5px)' }}
                     bg="rgba(255, 255, 255, 0.05)"
                     backdropFilter="blur(10px)"
+                    height="100%"
                   >
                     <Circle size="60px" bg={item.color} color="white">
-                      <Icon as={item.icon} w={8} h={8} />
+                      <Icon as={item.icon} w={7} h={7} />
                     </Circle>
-                    <Heading as="h3" size="lg" color="white">{item.title}</Heading>
-                    <Text color="gray.300">
+                    <Heading as="h3" size="md" color="white">{item.title}</Heading>
+                    <Text color="gray.300" flex="1" fontSize="sm">
                       {item.description}
                     </Text>
                   </VStack>

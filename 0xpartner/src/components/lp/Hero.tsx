@@ -57,7 +57,7 @@ const Hero = () => {
           >
             <Heading
               as="h1"
-              fontSize={{ base: "5xl", md: "6xl", lg: "7xl" }}
+              fontSize={{ base: "4xl", md: "5xl", lg: "6xl" }}
               bgGradient="linear(to-r, blue.300, purple.300, pink.300)"
               bgClip="text"
               fontWeight="extrabold"
@@ -66,10 +66,10 @@ const Hero = () => {
             >
               Revolutionize Your Brand Partnerships
             </Heading>
-            <Text fontSize={{ base: "xl", md: "2xl" }} mb={8} fontWeight="medium" color="whiteAlpha.900">
+            <Text fontSize={{ base: "lg", md: "xl" }} mb={8} fontWeight="medium" color="whiteAlpha.900">
               0xPartner: Where Blockchain Meets Influencer Marketing
             </Text>
-            <Text fontSize={{ base: "lg", md: "xl" }} mb={10} color="whiteAlpha.800">
+            <Text fontSize={{ base: "md", md: "lg" }} mb={10} color="whiteAlpha.800">
               Experience the future of secure, transparent, and efficient influencer-brand collaborations powered by cutting-edge blockchain technology.
             </Text>
             <HStack spacing={4}>
@@ -82,7 +82,7 @@ const Hero = () => {
                   bgGradient="linear(to-r, blue.400, purple.500)"
                   color="white"
                   rightIcon={<FaRocket />}
-                  fontSize="xl"
+                  fontSize="lg"
                   py={8}
                   px={10}
                   borderRadius="full"
@@ -123,13 +123,18 @@ const Hero = () => {
                 whileHover={{ scale: 1.05, boxShadow: "0px 0px 20px rgba(159, 122, 234, 0.6)" }}
                 whileTap={{ scale: 0.95 }}
                 size="lg"
-                colorScheme="purple"
+                color="white"
                 rightIcon={<FaPlay />}
-                fontSize="xl"
+                fontSize="lg"
                 py={8}
                 px={10}
                 borderRadius="full"
                 variant="outline"
+                borderColor="white"
+                _hover={{
+                  bg: "white",
+                  color: "purple.500",
+                }}
               >
                 Watch Demo
               </Button>

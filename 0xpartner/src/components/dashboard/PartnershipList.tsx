@@ -58,18 +58,18 @@ export default function PartnershipList({
           color={textColor}
         >
           <Flex alignItems="center" mb={8}>
-            <Icon as={FaFileContract} w={10} h={10} mr={4} color="purple.300" />
-            <Heading size="xl" color="white">Your Partnerships</Heading>
+            <Icon as={FaFileContract} w={8} h={8} mr={4} color="purple.300" />
+            <Heading size="lg" color="white">Your Partnerships</Heading>
           </Flex>
           <MotionButton
             leftIcon={<FaHandshake />}
             colorScheme="purple"
             onClick={onOpen}
             mb={8}
-            size="lg"
+            size="md"
             width="full"
-            height="60px"
-            fontSize="xl"
+            height="50px"
+            fontSize="lg"
             whileTap={{ scale: 0.95 }}
           >
             Create New Partnership
@@ -97,22 +97,22 @@ export default function PartnershipList({
                     <Flex justifyContent="space-between" alignItems="center">
                       <Badge
                         colorScheme={partnership.completed ? "green" : "yellow"}
-                        fontSize="md"
+                        fontSize="sm"
                         px={3}
                         py={1}
                         borderRadius="full"
                       >
                         {partnership.completed ? 'Completed' : 'Pending'}
                       </Badge>
-                      <Icon as={FaEthereum} w={6} h={6} color="purple.300" />
+                      <Icon as={FaEthereum} w={5} h={5} color="purple.300" />
                     </Flex>
-                    <Text fontSize="2xl" fontWeight="bold">
+                    <Text fontSize="xl" fontWeight="bold">
                       {partnership.amount} ETH
                     </Text>
-                    <Text fontSize="lg" fontWeight="medium">
+                    <Text fontSize="md" fontWeight="medium">
                       Partner:
                     </Text>
-                    <Text fontSize="md" isTruncated>
+                    <Text fontSize="sm" isTruncated>
                       {partnership.brand === account ? partnership.influencer : partnership.brand}
                     </Text>
                   </VStack>

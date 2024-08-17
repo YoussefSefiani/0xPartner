@@ -21,8 +21,11 @@ import {
   useColorModeValue,
   HStack,
   SimpleGrid,
+  Divider,
+  Avatar,
+  AvatarGroup,
 } from '@chakra-ui/react';
-import { FaHandshake, FaEthereum, FaInfoCircle, FaFileContract } from 'react-icons/fa';
+import { FaHandshake, FaEthereum, FaInfoCircle, FaFileContract, FaUserFriends, FaChartLine } from 'react-icons/fa';
 import { UserType } from '../../types/UserType';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -43,6 +46,7 @@ interface CreatePartnershipModalProps {
   setNewPartnershipAmount: (amount: string) => void;
   createPartnership: () => void;
   isCreatingPartnership: boolean;
+  onCreateSuccess: () => void;
 }
 
 const MotionModalContent = motion(ModalContent);
@@ -75,7 +79,7 @@ export default function CreatePartnershipModal({
     <AnimatePresence>
       {isOpen && (
         <Modal isOpen={isOpen} onClose={onClose} size="4xl" isCentered>
-          <ModalOverlay backdropFilter="blur(10px)" />
+          <ModalOverlay backdropFilter="blur(100px)" />
           <MotionModalContent
             bg={modalBg}
             color="white"
@@ -83,10 +87,10 @@ export default function CreatePartnershipModal({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 50, scale: 0.9 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
-            borderRadius="xl"
-            boxShadow="0 0 30px rgba(138, 75, 175, 0.3)"
-            p={6}
-            maxH="80vh"
+            borderRadius="2xl"
+            boxShadow="0 0 40px rgba(138, 75, 175, 0.4)"
+            p={8}
+            maxH="90vh"
             overflowY="auto"
             css={{
               '&::-webkit-scrollbar': { width: '4px' },
@@ -97,44 +101,55 @@ export default function CreatePartnershipModal({
               },
             }}
           >
-            <ModalHeader>
-              <Heading size="xl" bgGradient="linear(to-r, blue.400, purple.500, pink.500)" bgClip="text">
-                Create New Partnership
-              </Heading>
+            <ModalHeader p={0} mb={6}>
+              <Flex alignItems="center" justifyContent="space-between">
+                <HStack spacing={4}>
+                  <Icon as={FaHandshake} boxSize={8} color="purple.400" />
+                  <Heading size="xl" fontWeight="bold" bgGradient="linear(to-r, blue.300, purple.300)" bgClip="text">
+                    Create New Partnership
+                  </Heading>
+                </HStack>
+                <ModalCloseButton position="static" size="lg" />
+              </Flex>
             </ModalHeader>
-            <ModalCloseButton color="white" />
-            <ModalBody>
-              <MotionVStack spacing={6} align="stretch" initial="hidden" animate="visible" variants={{
-                visible: { transition: { staggerChildren: 0.1 } }
+            <ModalBody p={0}>
+              <MotionVStack spacing={8} align="stretch" initial="hidden" animate="visible" variants={{
+                visible: { transition: { staggerChildren: 0.15 } }
               }}>
                 <MotionBox variants={{
                   hidden: { opacity: 0, y: 20 },
                   visible: { opacity: 1, y: 0 }
                 }}>
-                  <Text fontSize="lg" color="white" lineHeight="tall">
-                    Creating a new partnership is the first step in establishing a collaboration. 
-                    Choose your partner wisely and set an appropriate amount for your partnership.
+                  <Text fontSize="lg" color="whiteAlpha.800" lineHeight="tall" fontWeight="medium">
+                    Forge a powerful alliance by creating a new partnership. Choose your collaborator wisely and set the perfect foundation for your joint venture.
                   </Text>
                 </MotionBox>
-                <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6}>
-                  <MotionBox bg={cardBg} p={4} borderRadius="lg" variants={{
+                <Divider borderColor="whiteAlpha.300" />
+                <SimpleGrid columns={{ base: 1, md: 2 }} spacing={8}>
+                  <MotionBox bg={cardBg} p={6} borderRadius="xl" boxShadow="lg" variants={{
                     hidden: { opacity: 0, x: -20 },
                     visible: { opacity: 1, x: 0 }
                   }}>
                     <FormControl isRequired>
-                      <FormLabel fontSize="xl" fontWeight="bold" color="white" mb={2}>Select Partner</FormLabel>
+                      <FormLabel fontSize="xl" fontWeight="bold" color="white" mb={4}>
+                        <HStack spacing={3}>
+                          <Icon as={FaUserFriends} color="blue.300" />
+                          <Text>Select Partner</Text>
+                        </HStack>
+                      </FormLabel>
                       {filteredPartners.length > 0 ? (
                         <Select
-                          placeholder="Choose a partner"
+                          placeholder="Choose your collaborator"
                           value={newPartnershipPartner}
                           onChange={handlePartnerChange}
-                          bg="transparent"
+                          bg="whiteAlpha.100"
                           color="white"
                           size="lg"
                           fontSize="md"
                           borderColor="whiteAlpha.300"
                           _hover={{ borderColor: "purple.300" }}
                           _focus={{ borderColor: "purple.500", boxShadow: "0 0 0 1px #805AD5" }}
+                          icon={<Icon as={FaChartLine} color="purple.300" />}
                         >
                           {filteredPartners.map((partner) => (
                             <option key={partner.address} value={partner.address} style={{color: 'black'}}>
@@ -143,29 +158,29 @@ export default function CreatePartnershipModal({
                           ))}
                         </Select>
                       ) : (
-                        <Text color="red.500" fontSize="md">No partners available. Please add partners first.</Text>
+                        <Text color="red.400" fontSize="md" fontWeight="medium">No partners available. Please add partners first.</Text>
                       )}
                     </FormControl>
                   </MotionBox>
-                  <MotionBox bg={cardBg} p={4} borderRadius="lg" variants={{
+                  <MotionBox bg={cardBg} p={6} borderRadius="xl" boxShadow="lg" variants={{
                     hidden: { opacity: 0, x: 20 },
                     visible: { opacity: 1, x: 0 }
                   }}>
                     <FormControl isRequired>
-                      <FormLabel fontSize="xl" fontWeight="bold" color="white" mb={2}>
-                        Amount (ETH)
-                        <Tooltip label="Enter the amount of ETH for this partnership" placement="top">
-                          <Icon as={FaInfoCircle} color="blue.500" ml={2} boxSize={4} />
-                        </Tooltip>
+                      <FormLabel fontSize="xl" fontWeight="bold" color="white" mb={4}>
+                        <HStack spacing={3}>
+                          <Icon as={FaEthereum} color="purple.300" />
+                          <Text>Partnership Amount</Text>
+                        </HStack>
                       </FormLabel>
                       <Flex alignItems="center">
                         <Input
-                          placeholder="Enter amount"
+                          placeholder="Enter ETH amount"
                           type="number"
                           step="0.01"
                           value={newPartnershipAmount}
                           onChange={(e) => setNewPartnershipAmount(e.target.value)}
-                          bg="transparent"
+                          bg="whiteAlpha.100"
                           color="white"
                           size="lg"
                           fontSize="md"
@@ -174,40 +189,61 @@ export default function CreatePartnershipModal({
                           _focus={{ borderColor: "purple.500", boxShadow: "0 0 0 1px #805AD5" }}
                           flex="1"
                         />
-                        <Icon as={FaEthereum} color="purple.500" boxSize={6} ml={2} />
+                        <Box ml={4}>
+                          <Tooltip label="Enter the amount of ETH for this partnership" placement="top">
+                            <Icon as={FaInfoCircle} color="blue.300" boxSize={6} />
+                          </Tooltip>
+                        </Box>
                       </Flex>
                     </FormControl>
                   </MotionBox>
                 </SimpleGrid>
-                <MotionBox bg={cardBg} p={4} borderRadius="lg" variants={{
+                <MotionBox bg={cardBg} p={6} borderRadius="xl" boxShadow="lg" variants={{
                   hidden: { opacity: 0, y: 20 },
                   visible: { opacity: 1, y: 0 }
                 }}>
-                  <HStack spacing={4}>
-                    <Icon as={FaFileContract} color="purple.500" boxSize={5} />
-                    <Text fontSize="lg" fontWeight="bold">Partnership Details</Text>
+                  <HStack spacing={4} mb={4}>
+                    <Icon as={FaFileContract} color="purple.400" boxSize={6} />
+                    <Text fontSize="xl" fontWeight="bold">Partnership Overview</Text>
                   </HStack>
-                  <Text fontSize="md" mt={2}>
-                    Please review the details carefully before creating the partnership.
+                  <Text fontSize="md" mb={4}>
+                    Review the details carefully before finalizing your partnership. This collaboration could be the start of something extraordinary!
                   </Text>
+                  <Flex justifyContent="space-between" alignItems="center">
+                    <AvatarGroup size="md" max={3}>
+                      <Avatar name="You" bg="blue.500" />
+                      <Avatar name="Partner" bg="purple.500" />
+                    </AvatarGroup>
+                    <Text fontSize="lg" fontWeight="bold">
+                      {newPartnershipAmount ? `${newPartnershipAmount} ETH` : 'Amount not set'}
+                    </Text>
+                  </Flex>
                 </MotionBox>
               </MotionVStack>
             </ModalBody>
-            <ModalFooter>
-              <HStack spacing={4} width="100%" justifyContent="center">
+            <ModalFooter justifyContent="center" mt={8}>
+              <HStack spacing={6}>
                 <MotionButton
                   leftIcon={<Icon as={FaHandshake} boxSize={5} />}
                   bgGradient="linear(to-r, blue.400, purple.500)"
                   color="white"
                   onClick={createPartnership}
                   isLoading={isCreatingPartnership}
-                  loadingText="Creating Partnership..."
+                  loadingText="Forging Partnership..."
                   isDisabled={!newPartnershipPartner || !newPartnershipAmount || isCreatingPartnership}
                   size="lg"
                   fontSize="lg"
-                  px={8}
+                  fontWeight="bold"
+                  px={10}
+                  py={6}
                   _hover={{ 
                     bgGradient: "linear(to-r, blue.500, purple.600)",
+                    transform: "translateY(-2px)",
+                    boxShadow: "xl",
+                  }}
+                  _active={{
+                    transform: "translateY(0)",
+                    boxShadow: "md",
                   }}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -218,10 +254,16 @@ export default function CreatePartnershipModal({
                   onClick={onClose}
                   size="lg"
                   fontSize="lg"
-                  px={8}
+                  fontWeight="bold"
+                  px={10}
+                  py={6}
                   color="white"
                   variant="outline"
-                  _hover={{ bg: 'whiteAlpha.200' }}
+                  _hover={{ bg: 'whiteAlpha.200', transform: "translateY(-2px)" }}
+                  _active={{
+                    transform: "translateY(0)",
+                    boxShadow: "md",
+                  }}
                 >
                   Cancel
                 </Button>

@@ -52,7 +52,7 @@ import {
           <VStack spacing={8} position="relative" zIndex={1}>
             <Heading
               as="h2"
-              size="3xl"
+              size="2xl"
               mb={4}
               bgGradient="linear(to-r, blue.300, purple.300)"
               bgClip="text"
@@ -60,7 +60,7 @@ import {
             >
               Revolutionize Your Partnerships Today!
             </Heading>
-            <Text fontSize="2xl" color="whiteAlpha.900" maxW="2xl" mb={8}>
+            <Text fontSize="xl" color="whiteAlpha.900" maxW="2xl" mb={8}>
               Join 0xPartner and unlock a world of secure, transparent, and lucrative collaborations powered by blockchain technology.
             </Text>
             <HStack spacing={8} justify="center" wrap="wrap">
@@ -74,7 +74,7 @@ import {
                     bgGradient="linear(to-r, blue.400, purple.500)"
                     color="white"
                     leftIcon={<Icon as={FaRocket} />}
-                    fontSize="xl"
+                    fontSize="lg"
                     py={8}
                     px={12}
                     borderRadius="full"
@@ -114,20 +114,20 @@ import {
                 <Button
                   size="lg"
                   variant="outline"
-                  fontSize="xl"
+                  fontSize="lg"
                   py={8}
                   px={12}
                   borderWidth={2}
-                  borderColor="purple.400"
-                  color="purple.400"
+                  borderColor="white"
+                  color="white"
                   _hover={{ bg: "rgba(159, 122, 234, 0.1)" }}
-                  leftIcon={<Icon as={FaCalendarAlt} color="purple.400" />}
+                  leftIcon={<Icon as={FaCalendarAlt} color="white" />}
                 >
                   Schedule a Demo
                 </Button>
               </motion.div>
             </HStack>
-            <Text fontSize="lg" color="whiteAlpha.800" mt={6}>
+            <Text fontSize="md" color="whiteAlpha.800" mt={6}>
               Join 1000+ brands and influencers already transforming their partnerships
             </Text>
           </VStack>

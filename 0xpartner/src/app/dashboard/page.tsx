@@ -14,6 +14,11 @@ import {
   Heading,
   Icon,
   useColorModeValue,
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import { FaUserPlus } from 'react-icons/fa';

@@ -20,8 +20,10 @@ import {
   Link,
   Flex,
   Spinner,
+  Badge,
+  IconButton
 } from '@chakra-ui/react';
-import { FaEthereum, FaCheck, FaTimes, FaFileContract, FaCopy, FaArrowRight, FaClock } from 'react-icons/fa';
+import { FaEthereum, FaCheck, FaTimes, FaFileContract, FaCopy, FaArrowRight, FaClock, FaHandshake, FaBuilding, FaUser, FaTimesCircle } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { ethers } from 'ethers';
@@ -123,10 +125,10 @@ export default function PartnershipDetailsModal({
   };
 
   return (
-    <AnimatePresence>
+<AnimatePresence>
       {isOpen && (
         <Modal isOpen={isOpen} onClose={onClose} size="4xl" isCentered>
-          <ModalOverlay backdropFilter="blur(10px)" />
+          <ModalOverlay backdropFilter="blur(100px)" />
           <MotionModalContent
             bg={modalBg}
             color="white"
@@ -145,7 +147,7 @@ export default function PartnershipDetailsModal({
               },
               '&::-webkit-scrollbar-track': {
                 width: '6px',
-              },
+              },    
               '&::-webkit-scrollbar-thumb': {
                 background: 'purple.500',
                 borderRadius: '24px',
@@ -153,7 +155,7 @@ export default function PartnershipDetailsModal({
             }}
           >
             <ModalHeader>
-              <Heading size="xl" bgGradient="linear(to-r, blue.400, purple.500, pink.500)" bgClip="text">
+              <Heading size="lg" color="white">
                 Partnership Details
               </Heading>
             </ModalHeader>
@@ -168,40 +170,79 @@ export default function PartnershipDetailsModal({
                   <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6}>
                     <MotionBox
                       bg={cardBg}
-                      p={4}
+                      p={6}
                       borderRadius="lg"
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.1 }}
+                      transition={{ delay: 0.1, duration: 0.3 }}
+                      boxShadow="0 4px 6px rgba(0, 0, 0, 0.1)"
+                      _hover={{ 
+                        boxShadow: "0 6px 8px rgba(138, 75, 175, 0.2)",
+                        transform: "translateY(-2px)",
+                        transition: "all 0.3s ease-in-out"
+                      }}
                     >
-                      <Text fontSize="xl" fontWeight="bold" mb={2}>
-                        Amount
-                      </Text>
-                      <HStack>
-                        <Icon as={FaEthereum} color="purple.500" boxSize={5} />
-                        <Text fontSize="lg">{currentPartnership.amount} ETH</Text>
-                      </HStack>
+                      <Flex alignItems="center" mb={4}>
+                        <Icon as={FaEthereum} color="purple.400" boxSize={6} mr={3} />
+                        <Text fontSize="xl" fontWeight="bold" color="white">
+                          Partnership Amount
+                        </Text>
+                      </Flex>
+                      <VStack spacing={2} align="stretch">
+                        <Text 
+                          fontSize="3xl" 
+                          fontWeight="bold" 
+                          color="white"
+                          bgGradient="linear(to-r, purple.400, pink.400)"
+                          bgClip="text"
+                        >
+                          {currentPartnership.amount} ETH
+                        </Text>
+                        <Text fontSize="sm" color="gray.400">
+                          Gas Fee: Estimated at contract execution
+                        </Text>
+                      </VStack>
+                      <Box mt={4} pt={4} borderTopWidth={1} borderTopColor="whiteAlpha.300">
+                        <Text fontSize="sm" color="gray.300">
+                          This partnership is secured by smart contract technology, ensuring transparency and trust between parties.
+                        </Text>
+                      </Box>
                     </MotionBox>
                     <MotionBox
                       bg={cardBg}
-                      p={4}
+                      p={6}
                       borderRadius="lg"
                       initial={{ opacity: 0, x: 20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.2 }}
+                      boxShadow="0 4px 6px rgba(0, 0, 0, 0.1)"
+                      _hover={{ boxShadow: "0 6px 8px rgba(0, 0, 0, 0.15)" }}
                     >
-                      <Text fontSize="xl" fontWeight="bold" mb={2}>
-                        Parties
-                      </Text>
-                      <VStack align="start" spacing={2}>
-                        <HStack>
-                          <Icon as={FaFileContract} color="purple.500" boxSize={4} />
-                          <Text fontSize="md" wordBreak="break-all">Brand: {currentPartnership.brand}</Text>
-                        </HStack>
-                        <HStack>
-                          <Icon as={FaFileContract} color="purple.500" boxSize={4} />
-                          <Text fontSize="md" wordBreak="break-all">Influencer: {currentPartnership.influencer}</Text>
-                        </HStack>
+                      <Flex alignItems="center" mb={4}>
+                        <Icon as={FaHandshake} color="purple.400" boxSize={6} mr={2} />
+                        <Text fontSize="xl" fontWeight="bold" color="white">
+                          Partnership Parties
+                        </Text>
+                      </Flex>
+                      <VStack align="stretch" spacing={4}>
+                        <Flex alignItems="center" bg="rgba(255, 255, 255, 0.1)" p={3} borderRadius="md">
+                          <Icon as={FaBuilding} color="blue.300" boxSize={5} mr={3} />
+                          <VStack align="start" spacing={0}>
+                            <Text fontSize="sm" color="gray.400">Brand</Text>
+                            <Text fontSize="md" color="white" fontWeight="medium" isTruncated maxWidth="200px">
+                              {currentPartnership.brand}
+                            </Text>
+                          </VStack>
+                        </Flex>
+                        <Flex alignItems="center" bg="rgba(255, 255, 255, 0.1)" p={3} borderRadius="md">
+                          <Icon as={FaUser} color="green.300" boxSize={5} mr={3} />
+                          <VStack align="start" spacing={0}>
+                            <Text fontSize="sm" color="gray.400">Influencer</Text>
+                            <Text fontSize="md" color="white" fontWeight="medium" isTruncated maxWidth="200px">
+                              {currentPartnership.influencer}
+                            </Text>
+                          </VStack>
+                        </Flex>
                       </VStack>
                     </MotionBox>
                   </SimpleGrid>
@@ -213,10 +254,10 @@ export default function PartnershipDetailsModal({
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3 }}
                   >
-                    <HStack mb={2}>
+                    <VStack mb={2} alignItems="center" spacing={2}>
                       <Icon as={currentPartnership.completed ? FaCheck : FaClock} color={currentPartnership.completed ? "green.500" : "yellow.500"} boxSize={5} />
-                      <Text fontSize="lg" fontWeight="bold">Status: {currentPartnership.completed ? 'Completed' : 'Pending'}</Text>
-                    </HStack>
+                      <Text color={currentPartnership.completed ? "green.500" : "yellow.500"} fontSize="md" fontWeight="bold" textAlign="center">Status: {currentPartnership.completed ? 'Completed' : 'Pending'}</Text>
+                    </VStack>
                     {!currentPartnership.completed && (
                       <HStack spacing={4} mt={4}>
                         <MotionButton
@@ -260,33 +301,56 @@ export default function PartnershipDetailsModal({
                     )}
                   </MotionBox>
                   <Divider />
-                  <Heading size="md" mt={2} mb={1}>Transaction History</Heading>
+                  <Heading size="sm" mt={2} mb={1}>Transaction History</Heading>
                   <VStack spacing={3} align="stretch">
                     {txHistory.map((tx, index) => (
                       <MotionBox
                         key={index}
-                        p={4}
+                        p={6}
                         bg={cardBg}
-                        borderRadius="lg"
+                        borderRadius="xl"
                         w="full"
+                        boxShadow="lg"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.1 * (index + 1) }}
                       >
                         <Flex justifyContent="space-between" alignItems="flex-start" flexWrap="wrap">
-                          <VStack align="start" spacing={2} maxW="70%">
-                            <Text fontSize="lg" fontWeight="bold">{tx.action}</Text>
-                            <Text fontSize="sm" wordBreak="break-all">{tx.user}</Text>
-                            <HStack>
-                              <Text fontSize="xs" wordBreak="break-all">{tx.txHash.slice(0, 6)}...{tx.txHash.slice(-4)}</Text>
-                              <Tooltip label="Copy to clipboard">
-                                <Icon as={FaCopy} cursor="pointer" onClick={() => copyToClipboard(tx.txHash)} color="purple.300" />
+                          <VStack align="start" spacing={3} maxW="70%">
+                            <Badge colorScheme="purple" fontSize="sm" px={2} py={1} borderRadius="md">
+                              {tx.action}
+                            </Badge>
+                            <Text fontSize="sm" fontWeight="medium" color="gray.300">
+                              {tx.user}
+                            </Text>
+                            <HStack spacing={2} alignItems="center">
+                              <Text fontSize="xs" fontWeight="bold" color="gray.400">
+                                {tx.txHash.slice(0, 6)}...{tx.txHash.slice(-4)}
+                              </Text>
+                              <Tooltip label="Copy to clipboard" placement="top">
+                                <IconButton
+                                  aria-label="Copy transaction hash"
+                                  icon={<FaCopy />}
+                                  size="xs"
+                                  variant="ghost"
+                                  colorScheme="purple"
+                                  onClick={() => copyToClipboard(tx.txHash)}
+                                />
                               </Tooltip>
                             </HStack>
                           </VStack>
-                          <Link href={`https://sepolia.etherscan.io/tx/${tx.txHash}`} isExternal color="white" fontWeight="bold" fontSize="sm" display="flex" alignItems="center">
+                          <Link
+                            href={`https://sepolia.etherscan.io/tx/${tx.txHash}`}
+                            isExternal
+                            color="white"
+                            fontSize="sm"
+                            display="flex"
+                            alignItems="center"
+                            _hover={{ textDecoration: 'none', color: 'purple.200' }}
+                            mb={2}
+                          >
                             View on Etherscan
-                            <Icon as={FaArrowRight} ml={1} boxSize={3} />
+                            <Icon as={FaArrowRight} ml={2} boxSize={4} />
                           </Link>
                         </Flex>
                       </MotionBox>

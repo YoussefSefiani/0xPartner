@@ -1,5 +1,5 @@
-import { Box, Heading, VStack, Input, Button, Text, useColorModeValue, Flex, Icon, Progress, HStack, Card, CardBody } from '@chakra-ui/react';
-import { FaUserPlus, FaBuilding, FaUser, FaArrowRight, FaArrowLeft } from 'react-icons/fa';
+import { Box, Heading, VStack, Input, Button, Text, useColorModeValue, Flex, Icon, Progress, HStack, Card, CardBody, InputGroup, InputLeftElement } from '@chakra-ui/react';
+import { FaUserPlus, FaBuilding, FaUser, FaArrowRight, FaArrowLeft, FaRocket, FaNetworkWired, FaShieldAlt } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 import { UserType } from '../../types/UserType';
 import { useState } from 'react';
@@ -65,17 +65,6 @@ export default function RegisterPartner({
         margin="auto"
       >
         <VStack spacing={8} align="stretch">
-          <Heading 
-            as="h2" 
-            size="xl" 
-            textAlign="center"
-            bgGradient="linear(to-r, blue.300, purple.300, pink.300)"
-            bgClip="text"
-            fontWeight="extrabold"
-          >
-            Join 0xPartner
-          </Heading>
-
           <Flex justify="space-between">
             {steps.map((s, index) => (
               <VStack key={index} spacing={2}>
@@ -106,28 +95,40 @@ export default function RegisterPartner({
               minHeight="200px"
             >
               {step === 0 && (
-                <Text fontSize="xl" textAlign="center" color={textColor} mb={4}>
-                  Welcome to 0xPartner! We're excited to have you join our community. Let's get started with your registration.
-                </Text>
+                <VStack spacing={6} align="center" maxWidth="600px">
+                  <Icon as={FaUserPlus} boxSize={16} color="purple.300" />
+                  <Heading fontSize="3xl" textAlign="center" color={textColor}>
+                    Welcome to 0xPartner !
+                  </Heading>
+                  <Text fontSize="xl" textAlign="center" color={textColor}>
+                    We're excited to have you join our community. Let's get started with your registration.
+                  </Text>
+                  <Text fontSize="lg" fontWeight="bold" color="white">
+                    Ready to revolutionize your partnerships ?
+                  </Text>
+                </VStack>
               )}
               {step === 1 && (
-                <VStack spacing={4}>
+                <VStack spacing={6}>
                   <Text fontSize="xl" textAlign="center" color={textColor} mb={4}>
-                    Are you joining as a Brand or an Influencer?
+                    Are you joining as a Brand or an Influencer ?
                   </Text>
-                  <HStack spacing={4}>
+                  <HStack spacing={6}>
                     <Card 
                       onClick={() => setPartnerType(UserType.Brand)}
                       cursor="pointer"
                       bg={partnerType === UserType.Brand ? "purple.500" : "whiteAlpha.200"}
                       _hover={{ bg: "purple.400" }}
-                      width="200px"
-                      height="150px"
+                      width="250px"
+                      height="200px"
                     >
                       <CardBody>
-                        <VStack justify="center" height="100%">
-                          <Icon as={FaBuilding} boxSize={8} color={textColor} />
-                          <Text color={textColor}>Brand</Text>
+                        <VStack justify="center" height="100%" spacing={4}>
+                          <Icon as={FaBuilding} boxSize={10} color={textColor} />
+                          <Text color={textColor} fontSize="lg" fontWeight="bold">Brand</Text>
+                          <Text color={textColor} fontSize="sm" textAlign="center">
+                            Join as a company looking to collaborate with influencers for marketing campaigns.
+                          </Text>
                         </VStack>
                       </CardBody>
                     </Card>
@@ -136,13 +137,16 @@ export default function RegisterPartner({
                       cursor="pointer"
                       bg={partnerType === UserType.Influencer ? "purple.500" : "whiteAlpha.200"}
                       _hover={{ bg: "purple.400" }}
-                      width="200px"
-                      height="150px"
+                      width="250px"
+                      height="200px"
                     >
                       <CardBody>
-                        <VStack justify="center" height="100%">
-                          <Icon as={FaUser} boxSize={8} color={textColor} />
-                          <Text color={textColor}>Influencer</Text>
+                        <VStack justify="center" height="100%" spacing={4}>
+                          <Icon as={FaUser} boxSize={10} color={textColor} />
+                          <Text color={textColor} fontSize="lg" fontWeight="bold">Influencer</Text>
+                          <Text color={textColor} fontSize="sm" textAlign="center">
+                            Join as a content creator looking to partner with brands for sponsored content.
+                          </Text>
                         </VStack>
                       </CardBody>
                     </Card>
@@ -150,22 +154,129 @@ export default function RegisterPartner({
                 </VStack>
               )}
               {step === 2 && (
-                <Input
-                  placeholder={`Enter your ${partnerType === UserType.Brand ? 'brand' : 'influencer'} name`}
-                  value={newPartnerName}
-                  onChange={(e) => setNewPartnerName(e.target.value)}
-                  size="lg"
-                  bg={inputBg}
-                  color={textColor}
-                  _placeholder={{ color: "whiteAlpha.700" }}
-                  borderColor="whiteAlpha.300"
-                  _focus={{ borderColor: "purple.300", boxShadow: "0 0 0 1px #805AD5" }}
-                />
+                <VStack spacing={6} align="stretch" width="100%">
+                  <Heading fontSize="2xl" textAlign="center" color={textColor}>
+                    Let's Get to Know You
+                  </Heading>
+                  <Text fontSize="md" textAlign="center" color={textColor}>
+                    Enter your {partnerType === UserType.Brand ? 'brand' : 'influencer'} name below
+                  </Text>
+                  <InputGroup size="lg">
+                    <InputLeftElement pointerEvents="none">
+                      <Icon as={partnerType === UserType.Brand ? FaBuilding : FaUser} color="purple.300" />
+                    </InputLeftElement>
+                    <Input
+                      placeholder={`Your ${partnerType === UserType.Brand ? 'brand' : 'influencer'} name`}
+                      value={newPartnerName}
+                      onChange={(e) => setNewPartnerName(e.target.value)}
+                      bg={inputBg}
+                      color={textColor}
+                      _placeholder={{ color: "whiteAlpha.700" }}
+                      borderColor="whiteAlpha.300"
+                      _focus={{ borderColor: "purple.300", boxShadow: "0 0 0 1px #805AD5" }}
+                    />
+                  </InputGroup>
+                  <Text fontSize="sm" color="gray.400" textAlign="center">
+                    This name will be visible to potential partners on the platform
+                  </Text>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3 }}
+                  >
+                    <Box
+                      borderWidth={1}
+                      borderRadius="md"
+                      p={4}
+                      bg="rgba(128, 90, 213, 0.1)"
+                      borderColor="purple.300"
+                    >
+                      <Text fontSize="sm" color={textColor}>
+                        💡 Tip: Choose a name that's memorable and reflects your brand identity or personal style.
+                      </Text>
+                    </Box>
+                  </motion.div>
+                </VStack>
               )}
               {step === 3 && (
-                <Text fontSize="xl" textAlign="center" color={textColor}>
-                  Great! You're all set to join as {newPartnerName} ({partnerType === UserType.Brand ? 'Brand' : 'Influencer'}). Click 'Finish' to complete your registration.
-                </Text>
+                <VStack spacing={8} align="center" w="full">
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ type: "spring", stiffness: 260, damping: 20 }}
+                  >
+                    <Icon
+                      as={partnerType === UserType.Brand ? FaBuilding : FaUser}
+                      boxSize={24}
+                      color="purple.300"
+                      filter="drop-shadow(0px 0px 8px rgba(128, 90, 213, 0.6))"
+                    />
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                  >
+                    <Heading fontSize="4xl" textAlign="center" color={textColor} fontWeight="extrabold">
+                      Welcome aboard, {newPartnerName} !
+                    </Heading>
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 }}
+                  >
+                    <Text fontSize="2xl" textAlign="center" color={textColor} fontWeight="medium">
+                      You're all set to join as {partnerType === UserType.Brand ? 'a Brand' : 'an Influencer'}.
+                    </Text>
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.6, type: "spring", stiffness: 100 }}
+                  >
+                    <Box
+                      borderWidth={3}
+                      borderColor="purple.400"
+                      borderRadius="xl"
+                      p={6}
+                      bg="rgba(128, 90, 213, 0.15)"
+                      boxShadow="0 0 20px rgba(128, 90, 213, 0.3)"
+                      maxW="md"
+                      w="full"
+                    >
+                      <VStack spacing={4} align="start">
+                        <HStack>
+                          <Icon as={FaRocket} color="purple.300" boxSize={6} />
+                          <Text fontSize="lg" color={textColor} fontWeight="semibold">
+                            Revolutionize Web3 partnerships
+                          </Text>
+                        </HStack>
+                        <HStack>
+                          <Icon as={FaNetworkWired} color="purple.300" boxSize={6} />
+                          <Text fontSize="lg" color={textColor} fontWeight="semibold">
+                            Access to {partnerType === UserType.Brand ? 'top influencers' : 'innovative brands'}
+                          </Text>
+                        </HStack>
+                        <HStack>
+                          <Icon as={FaShieldAlt} color="purple.300" boxSize={6} />
+                          <Text fontSize="lg" color={textColor} fontWeight="semibold">
+                            Secure & transparent collaborations
+                          </Text>
+                        </HStack>
+                      </VStack>
+                    </Box>
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.8 }}
+                  >
+                    <Text fontSize="xl" fontWeight="bold" color="white" textAlign="center">
+                      Click 'Finish' to complete your registration and embark on an exciting journey !
+                    </Text>
+                  </motion.div>
+                </VStack>
               )}
             </MotionFlex>
           </AnimatePresence>

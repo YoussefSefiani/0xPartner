@@ -62,7 +62,7 @@ import {
         />
         <Heading
           as="h2"
-          size="4xl"
+          size="3xl"
           textAlign="center"
           bgGradient="linear(to-r, blue.300, purple.300, pink.300)"
           bgClip="text"
@@ -114,13 +114,13 @@ import {
                 >
                   <Icon
                     as={item.icon}
-                    w={16}
-                    h={16}
+                    w={14}
+                    h={14}
                     mb={6}
                     color="blue.300"
                   />
                   <Text
-                    fontSize="2xl"
+                    fontSize="xl"
                     fontStyle="italic"
                     mb={6}
                     color="gray.200"
@@ -133,13 +133,13 @@ import {
                   <VStack spacing={2}>
                     <Heading
                       as="h4"
-                      size="lg"
+                      size="md"
                       color="blue.300"
                     >
                       {item.name}
                     </Heading>
                     <Text
-                      fontSize="md"
+                      fontSize="sm"
                       fontWeight="medium"
                       color="gray.400"
                     >
@@ -156,8 +156,8 @@ import {
             <Box
               key={index}
               as="button"
-              width={3}
-              height={3}
+              width={2}
+              height={2}
               borderRadius="full"
               bg={currentTestimonial === index ? 'blue.300' : 'gray.600'}
               opacity={currentTestimonial === index ? 1 : 0.5}
