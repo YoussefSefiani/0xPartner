@@ -8,16 +8,19 @@ import {
     Icon,
   } from '@chakra-ui/react';
   import { motion } from 'framer-motion';
-  import { FaRocket, FaCalendarAlt } from 'react-icons/fa';
+  import { FaRocket, FaCalendarAlt, FaPlay } from 'react-icons/fa';
   import Link from 'next/link';
   import { useInView } from 'react-intersection-observer';
-  
-  const CTA = () => {
+  import { useDisclosure } from '@chakra-ui/react';
+  import VideoModal from './VideoModal';
+
+const CTA = () => {
     const { ref, inView } = useInView({
       triggerOnce: true,
       threshold: 0.1,
     });
-  
+    const { isOpen, onOpen, onClose } = useDisclosure();
+
     return (
       <motion.div
         ref={ref}
@@ -121,9 +124,10 @@ import {
                   borderColor="white"
                   color="white"
                   _hover={{ bg: "rgba(159, 122, 234, 0.1)" }}
-                  leftIcon={<Icon as={FaCalendarAlt} color="white" />}
+                  leftIcon={<Icon as={FaPlay} color="white" />}
+                  onClick={onOpen}
                 >
-                  Schedule a Demo
+                  Watch Demo
                 </Button>
               </motion.div>
             </HStack>
@@ -132,6 +136,7 @@ import {
             </Text>
           </VStack>
         </Box>
+        <VideoModal isOpen={isOpen} onClose={onClose} />
       </motion.div>
     );
   };

@@ -7,12 +7,14 @@ import {
   Text,
   HStack,
   Image,
+  useDisclosure,
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { FaRocket, FaPlay } from 'react-icons/fa';
 import { chakra } from '@chakra-ui/react';
 import { useInView } from 'react-intersection-observer';
+import VideoModal from './VideoModal';
 
 const MotionBox = chakra(motion.div);
 
@@ -21,6 +23,7 @@ const Hero = () => {
     triggerOnce: true,
     threshold: 0.1,
   });
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <Box
@@ -135,6 +138,7 @@ const Hero = () => {
                   bg: "white",
                   color: "purple.500",
                 }}
+                onClick={onOpen}
               >
                 Watch Demo
               </Button>
@@ -166,6 +170,7 @@ const Hero = () => {
         bgGradient="none"
         zIndex={1}
       />
+      <VideoModal isOpen={isOpen} onClose={onClose} />
     </Box>
   );
 };
